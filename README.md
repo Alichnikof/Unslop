@@ -1,10 +1,28 @@
-# vibe-stack
+# Unslop
 
-> A curated starter for vibe-coding professional websites with Claude Code.
+> A boilerplate for AI-assisted website builds, with the instructions, tools, and design systems needed to ship cleaner, sharper website design with any AI coding tool.
 
-This repo is a starting point for building websites with AI that actually look good — not like AI slop. It bundles the plugins, MCPs, CLIs, skills, and configuration that make Claude Code a full design-to-deploy workflow.
+Unslop is the template I use when starting a new website project.
 
-The `CLAUDE.md` file is the brain — it teaches Claude Code how to build websites that are SEO-optimized, animated, accessible, and visually distinctive.
+The goal is simple: every new build should start from the same solid base, use the same good practices, and give the AI the same high-quality context from day one. Instead of reassembling that setup every time, I bundled it here, instructions, skills, MCPs, CLI tools, and a minimal project scaffold.
+
+This repo is opinionated, practical, and still evolving. I update it as I find better tools, better patterns, and better ways to make AI-assisted web builds more repeatable.
+
+If you have ideas, improvements, or tools that deserve a place in the stack, open an issue or submit a PR.
+
+---
+
+## Works with any AI coding tool
+
+I use Claude Code daily so that's what this is built around, but Unslop isn't locked to one AI. Cursor, GitHub Copilot, Codex, Windsurf — they all read instruction files. Rename `CLAUDE.md` to `AGENTS.md` or whatever your tool expects and you're good to go.
+
+The value here isn't the AI — it's the stack. The combination of:
+- **Instructions** that teach any AI to stop generating slop and start building with taste
+- **CLI tools** that give your AI real capabilities — deploy, scrape, test, screenshot, all from the terminal
+- **MCP resources** that give your AI access to quality components and design systems instead of hallucinating everything from scratch
+- **Skills** that enforce best practices — design taste, accessibility, production quality, the stuff AI skips by default
+
+Swap the AI, keep the stack. The setup is the value.
 
 ---
 
@@ -12,7 +30,7 @@ The `CLAUDE.md` file is the brain — it teaches Claude Code how to build websit
 
 ```bash
 # Clone and install
-git clone https://github.com/YOUR_USERNAME/vibe-stack.git my-project
+git clone https://github.com/Alichnikof/unslop.git my-project
 cd my-project
 npm install
 
@@ -28,16 +46,16 @@ npm run dev
 
 ### The CLAUDE.md
 
-The core value of this repo. It instructs Claude Code to:
+This is the core instruction file. It tells the AI how to work inside the project and what standards to follow.
 
-- Build **SEO-optimized** pages (meta tags, Open Graph, JSON-LD, sitemap, robots.txt)
-- Generate **llms.txt** for AI discoverability
-- Create **animated** interfaces with Framer Motion (LazyMotion, spring physics, reduced motion support)
-- Avoid **AI slop** (no gradient text, no purple neon, no floating blobs, no emoji in UI)
-- **Deploy via CLI** — Vercel, GitHub, Firecrawl, Playwright all from the terminal
-- Use **sub-agents** for parallel work
-- Use **Supabase** for backend via MCP
-- Optimize for **context window efficiency**
+It covers things like:
+
+- Build SEO-optimized pages (meta tags, Open Graph, JSON-LD, sitemap, robots.txt, llms.txt)
+- Animate with Framer Motion properly (LazyMotion, spring physics, reduced motion support) — not random CSS animations
+- What to never do — no gradient text, no purple neon, no floating blobs, no emoji in UI, no placeholder text
+- Deploy everything from the terminal via Vercel, GitHub, Firecrawl, Playwright CLIs
+- Use parallel sub-agents for independent tasks, Supabase backend via MCP
+- Stay efficient with context window — don't waste tokens on stuff that doesn't matter
 
 ### Framework & Core
 
@@ -106,7 +124,7 @@ Things I'm currently trying out and might add to the stack:
 ## File Structure
 
 ```
-vibe-stack/
+unslop/
 ├── CLAUDE.md                    # AI operating manual (the core value)
 ├── README.md                    # You are here
 ├── package.json                 # Minimal deps
@@ -169,17 +187,6 @@ Edit `.claude/.mcp.json` and add your API keys:
 - **Gemini Design**: Get a key at [Google AI Studio](https://aistudio.google.com/)
 
 > **Warning**: Never commit real API keys. The `.mcp.json` ships with placeholders only.
-
----
-
-## Philosophy
-
-1. **Typography over decoration** — strong hierarchy, not visual noise
-2. **Restraint is taste** — one accent color, structured whitespace, purposeful motion
-3. **CLI-first** — deploy, push, scrape, test from the terminal
-4. **Parallel agents** — break work into independent sub-tasks
-5. **Real content** — no placeholders in production
-6. **Context efficiency** — keep CLAUDE.md lean, offload details to `docs/`
 
 ---
 
