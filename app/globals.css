@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+/*
+ * Design tokens — fill these in during project setup.
+ * Use var(--token-name) in components, never hardcode hex.
+ */
+:root {
+  /* Backgrounds */
+  --bg-base: #ffffff;
+  --bg-surface: #fafafa;
+  --bg-raised: #f0f0f0;
+
+  /* Text */
+  --ink-primary: #0d0d0b;
+  --ink-secondary: #4a4a4a;
+  --ink-muted: #9a9a9a;
+
+  /* Accent — pick ONE strong accent */
+  --accent-primary: #0d0d0b;
+
+  /* Lines / borders */
+  --line: #e0e0e0;
+}

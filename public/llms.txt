@@ -1,0 +1,15 @@
+# Your Project Name
+
+> One-line description of what this site/product does.
+
+## What this is
+Describe your product or site for AI crawlers and LLM indexing.
+
+## Key pages
+- / — Home
+- /about — About
+- /pricing — Pricing
+
+## Contact
+- Website: https://yourdomain.com
+- Email: hello@yourdomain.com
