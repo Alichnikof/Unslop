@@ -64,7 +64,7 @@ The core value of this repo. It instructs Claude Code to:
 | MCP | What it does |
 |-----|-------------|
 | **21st.dev** | Search and install animated React components (configured in `.claude/.mcp.json`) |
-| **Playwright** | Browser automation, screenshots, visual testing |
+| **Gemini Design** | AI-powered frontend code generation via Google Gemini — still testing this one, might not stay in the final stack (configured in `.claude/.mcp.json`) |
 
 ### CLIs
 
@@ -92,11 +92,14 @@ The core value of this repo. It instructs Claude Code to:
 
 ## Coming Soon
 
-We're exploring integration with:
+Things I'm currently trying out and might add to the stack:
 
-- **Gemini Design MCP** — AI-powered frontend code generation via Google Gemini
-- **Google Stitch MCP** — semantic design system generation and management
-- **Pencil.dev MCP** — collaborative design tooling
+- **Firecrawl CLI Skill** — want to bundle web scraping as a skill so you don't need the CLI separately
+- **Nano Banana MCP** — AI-powered design assistance, looks promising
+- **Chrome DevTools MCP** — browser debugging and performance profiling straight from Claude Code
+- **Gemini Design MCP** — letting Gemini generate frontend code for you, already in the MCP config but still figuring out if it earns its spot
+- **Google Stitch MCP** — semantic design system generation, haven't fully tested yet
+- **Pencil.dev MCP** — collaborative design tooling, same deal — trying it out
 
 ---
 
@@ -147,6 +150,9 @@ vibe-stack/
 - [Claude Code](https://claude.ai/code) CLI installed
 - [GitHub CLI](https://cli.github.com/) (`gh`)
 - [Vercel CLI](https://vercel.com/docs/cli) (`npm i -g vercel`)
+- [Playwright CLI](https://playwright.dev/) (`npx playwright install`)
+- [Firecrawl CLI](https://www.firecrawl.dev/) (`npm i -g firecrawl`)
+- [UI/UX Pro Max Skill](https://ui-ux-pro-max-skill.nextlevelbuilder.io/) — installed globally in your Claude Code config (`claude skill add`)
 
 ### Install Claude Code plugins
 
@@ -160,24 +166,9 @@ claude plugin add vercel
 
 Edit `.claude/.mcp.json` and add your API keys:
 - **21st.dev**: Get a key at [21st.dev](https://21st.dev)
+- **Gemini Design**: Get a key at [Google AI Studio](https://aistudio.google.com/)
 
 > **Warning**: Never commit real API keys. The `.mcp.json` ships with placeholders only.
-
-### Playwright
-
-Playwright MCP comes with the Playwright plugin. For the CLI:
-
-```bash
-npx playwright install
-```
-
-### Firecrawl
-
-```bash
-npm i -g firecrawl
-```
-
-Or use via the Firecrawl plugin for Claude Code.
 
 ---
 
@@ -189,6 +180,21 @@ Or use via the Firecrawl plugin for Claude Code.
 4. **Parallel agents** — break work into independent sub-tasks
 5. **Real content** — no placeholders in production
 6. **Context efficiency** — keep CLAUDE.md lean, offload details to `docs/`
+
+---
+
+## Resources
+
+Tools, skills, and references that power this stack:
+
+- [Impeccable](https://impeccable.style/) — design quality CLI for auditing and polishing UI
+- [21st.dev](https://21st.dev/home) — animated React component library via MCP
+- [Pencil.dev](https://www.pencil.dev/) — collaborative design tooling
+- [Google Stitch](https://stitch.withgoogle.com/) — semantic design system generation
+- [Taste Skill](https://github.com/Leonxlnx/taste-skill) — design taste enforcement skills for Claude Code
+- [UI/UX Pro Max Skill](https://ui-ux-pro-max-skill.nextlevelbuilder.io/) — advanced design system queries and generation (global prerequisite)
+- [Firecrawl](https://www.firecrawl.dev/) — web scraping and content extraction
+- [Playwright](https://playwright.dev/) — browser automation and visual testing
 
 ---
 
