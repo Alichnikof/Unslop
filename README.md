@@ -91,8 +91,8 @@ It covers things like:
 | **Playwright** | E2E testing, visual regression, screenshots |
 | **Impeccable** | Design quality audits (audit, polish, animate, critique...) |
 | **Firecrawl** | Web scraping, search, content extraction |
-| **GitHub CLI** (`gh`) | PRs, issues, releases from terminal |
-| **Vercel CLI** | Deploy, env vars, domains, logs |
+| **GitHub ** | PRs, issues, releases from terminal |
+| **Vercel ** | Deploy, env vars, domains, logs |
 
 ### Skills (bundled in `.claude/skills/`)
 
@@ -106,6 +106,7 @@ It covers things like:
 | **redesign-existing-projects** | Audit and upgrade existing websites |
 | **stitch-design-taste** | Semantic design system generation (DESIGN.md files) |
 
+...
 ---
 
 ## Coming Soon
