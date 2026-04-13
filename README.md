@@ -91,14 +91,15 @@ It covers things like:
 | **Playwright** | E2E testing, visual regression, screenshots |
 | **Impeccable** | Design quality audits (audit, polish, animate, critique...) |
 | **Firecrawl** | Web scraping, search, content extraction |
-| **GitHub CLI** (`gh`) | PRs, issues, releases from terminal |
-| **Vercel CLI** | Deploy, env vars, domains, logs |
+| **GitHub ** | PRs, issues, releases from terminal |
+| **Vercel ** | Deploy, env vars, domains, logs |
 
 ### Skills (bundled in `.claude/skills/`)
 
 | Skill | What it does |
 |-------|-------------|
 | **Impeccable** (18 skills) | Full design audit suite — audit, polish, animate, bolder, clarify, colorize, critique, delight, distill, layout, optimize, overdrive, quieter, shape, typeset, adapt, impeccable |
+| **UI UX Pro Max** (7 skills) | "AI skill that provides design intelligence for building professional UI/UX"|
 | **design-taste-frontend** | Anti-AI-slop design enforcement with metric-based rules |
 | **high-end-visual-design** | Premium agency-level design standards |
 | **minimalist-ui** | Editorial-style, warm monochrome, ultra-flat components |
@@ -106,6 +107,7 @@ It covers things like:
 | **redesign-existing-projects** | Audit and upgrade existing websites |
 | **stitch-design-taste** | Semantic design system generation (DESIGN.md files) |
 
+...
 ---
 
 ## Coming Soon
@@ -118,6 +120,7 @@ Things I'm currently trying out and might add to the stack:
 - **Gemini Design MCP** — letting Gemini generate frontend code for you, already in the MCP config but still figuring out if it earns its spot
 - **Google Stitch MCP** — semantic design system generation, haven't fully tested yet
 - **Pencil.dev MCP** — collaborative design tooling, same deal — trying it out
+- UI UX Pro CLI ?
 
 ---
 
