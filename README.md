@@ -82,7 +82,6 @@ It covers things like:
 | MCP | What it does |
 |-----|-------------|
 | **21st.dev** | Search and install animated React components (configured in `.claude/.mcp.json`) |
-| **Gemini Design** | AI-powered frontend code generation via Google Gemini — still testing this one, might not stay in the final stack (configured in `.claude/.mcp.json`) |
 
 ### CLIs
 
@@ -106,6 +105,7 @@ It covers things like:
 | **industrial-brutalist-ui** | Raw Swiss typography meets terminal aesthetics |
 | **redesign-existing-projects** | Audit and upgrade existing websites |
 | **stitch-design-taste** | Semantic design system generation (DESIGN.md files) |
+| **Firecrawl Skills** (7 skills) | Web content extraction and research — scrape, search, crawl, interact, map, download, agent (structured data) |
 
 ...
 ---
@@ -114,10 +114,8 @@ It covers things like:
 
 Things I'm currently trying out and might add to the stack:
 
-- **Firecrawl CLI Skill** — want to bundle web scraping as a skill so you don't need the CLI separately
 - **Nano Banana MCP** — AI-powered design assistance, looks promising
 - **Chrome DevTools MCP** — browser debugging and performance profiling straight from Claude Code
-- **Gemini Design MCP** — letting Gemini generate frontend code for you, already in the MCP config but still figuring out if it earns its spot
 - **Google Stitch MCP** — semantic design system generation, haven't fully tested yet
 - **Pencil.dev MCP** — collaborative design tooling, same deal — trying it out
 - UI UX Pro CLI ?
@@ -187,7 +185,6 @@ claude plugin add vercel
 
 Edit `.claude/.mcp.json` and add your API keys:
 - **21st.dev**: Get a key at [21st.dev](https://21st.dev)
-- **Gemini Design**: Get a key at [Google AI Studio](https://aistudio.google.com/)
 
 > **Warning**: Never commit real API keys. The `.mcp.json` ships with placeholders only.
 

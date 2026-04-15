@@ -88,9 +88,19 @@ Use these CLIs directly — don't use the web UI when the CLI works:
 |------|-------|
 | **Vercel CLI** | `vercel deploy --prod`, `vercel env pull`, `vercel logs` |
 | **GitHub CLI** | `gh pr create`, `gh issue create`, `gh repo` |
-| **Firecrawl CLI** | `npx firecrawl` — scrape sites for content, research, competitive analysis |
+| **Firecrawl CLI** | `npx firecrawl scrape <url>`, `npx firecrawl search <query>`, `npx firecrawl crawl <url>` — web scraping, research, competitive analysis |
 | **Playwright CLI** | `npx playwright test` — E2E tests, visual regression, screenshots |
 | **Impeccable** | `/impeccable audit`, `/impeccable polish` — design quality enforcement |
+
+#### Firecrawl: Website Scraping & Research
+
+Firecrawl is a CLI-first tool for extracting content from websites. Use it for:
+- **Scraping**: Extract markdown from any URL (`firecrawl scrape <url>`)
+- **Search**: Web search with full-page content extraction (`firecrawl search <query>`)
+- **Crawl**: Bulk extract entire site sections (`firecrawl crawl <url>`)
+- **Interact**: Navigate and click through JavaScript-driven pages
+- **Map**: Discover all URLs on a site
+
 
 ### Deploy flow
 ```bash
@@ -143,6 +153,7 @@ Before calling a page "done":
 - `/design-taste-frontend` — anti-AI-slop design enforcement
 - `/high-end-visual-design` — premium agency-level design standards
 - `/stitch-design-taste` — semantic design system generation
+- `/firecrawl-scrape`, `/firecrawl-search`, `/firecrawl-crawl`, `/firecrawl-interact`, `/firecrawl-map`, `/firecrawl-download`, `/firecrawl-agent` — website scraping and content extraction
 
 ---
 
@@ -168,6 +179,17 @@ Keep this CLAUDE.md lean. Don't add:
 - Redundant explanations
 
 If you need project-specific context (design tokens, component inventory, API schemas), create separate files in a `docs/` folder and reference them here.
+
+---
+
+## Removed: Gemini Design MCP
+
+The Gemini Design MCP was removed from this stack because it consumed too many tokens for marginal benefit. Instead, use:
+- **21st.dev MCP** for searching and installing pre-built animated components
+- **Design skills** (`/impeccable`, `/design-taste-frontend`, `/high-end-visual-design`, etc.) for design intelligence and audits
+- **Firecrawl skills** for researching competitor design and extracting design inspiration from the web
+
+This approach is more token-efficient and gives you real, reusable components instead of AI-generated code.
 
 ---
 
