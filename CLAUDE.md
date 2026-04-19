@@ -61,6 +61,7 @@ Key packages:
 
 ---
 
+
 ## 4) MCPs
 
 Use the configured MCP servers in `.mcp.json` when they fit the task:
@@ -71,12 +72,9 @@ Use the configured MCP servers in `.mcp.json` when they fit the task:
 | Supabase | Backend work: schema inspection, migrations, SQL, auth, generated types, and project metadata |
 
 Component rule: check **Magic / 21st.dev** before building complex React UI from scratch, then adapt results to `docs/design/DESIGN.md`.
-
-Backend rule: use **Supabase MCP** for database and backend operations when a Supabase project is configured. Prefer project-scoped access with `project_ref`.
-
 ---
 
-## 5) CLI-First and Token-Efficient Workflow
+## 5) CLI-First
 
 Use CLI tools by default to reduce context and token usage.
 
@@ -86,8 +84,6 @@ Use CLI tools by default to reduce context and token usage.
 | GitHub CLI | `gh pr create`, `gh pr view`, `gh issue create` |
 | Firecrawl CLI | `npx firecrawl scrape`, `npx firecrawl search`, `npx firecrawl crawl` |
 | Playwright CLI | `npx playwright test` |
-| Magic MCP | 21st.dev component search and selection |
-| Supabase MCP | Backend schema, SQL, migrations, auth, and project metadata |
 
 Rules:
 - Prefer direct CLI runs over long explanatory back-and-forth.
