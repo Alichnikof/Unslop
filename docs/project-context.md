@@ -16,6 +16,7 @@ Fill this file before implementation work starts.
 ## Brand and UX Direction
 - Brand voice:
 - Visual direction:
+- Inspiration sources:
 - Accessibility priorities:
 
 ## Technical Constraints

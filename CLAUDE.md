@@ -1,6 +1,6 @@
-# vibe-stack - CLAUDE.md
+# Unslop - CLAUDE.md
 
-> Template operating manual for projects bootstrapped from vibe-stack.
+> Operating manual for AI-assisted website and full-stack app builds.
 
 ---
 
@@ -41,7 +41,17 @@ Rules:
 
 ---
 
-## 3) Stack
+## 3) Inspiration Intake
+
+Use `docs/inspiration/` as a simple drop zone for visual references, screenshots, exported design drafts, example `DESIGN.md` files, Stitch outputs, Claude Design outputs, competitor notes, and moodboards.
+
+Before visual design, redesign, or design critique work, quickly check `docs/inspiration/README.md` and any obviously relevant files in `docs/inspiration/`. Do not load the whole folder unless the user asks.
+
+Rule of thumb: inspiration is input, `DESIGN.md` is the decision.
+
+---
+
+## 4) Stack
 
 | Layer | Choice |
 |-------|--------|
@@ -62,7 +72,7 @@ Key packages:
 ---
 
 
-## 4) MCPs
+## 5) MCPs
 
 Use the configured MCP servers in `.mcp.json` when they fit the task:
 
@@ -72,9 +82,12 @@ Use the configured MCP servers in `.mcp.json` when they fit the task:
 | Supabase | Backend work: schema inspection, migrations, SQL, auth, generated types, and project metadata |
 
 Component rule: check **Magic / 21st.dev** before building complex React UI from scratch, then adapt results to `docs/design/DESIGN.md`.
+
+Backend rule: use **Supabase MCP** for database and backend operations when a Supabase project is configured. Prefer project-scoped access with `project_ref`.
+
 ---
 
-## 5) CLI-First
+## 6) CLI-First
 
 Use CLI tools by default to reduce context and token usage.
 
@@ -92,7 +105,7 @@ Rules:
 
 ---
 
-## 6) Motion Guidance (Flexible Defaults)
+## 7) Motion Guidance (Flexible Defaults)
 
 These are defaults, not hard laws. Adapt by use case and skill guidance.
 
@@ -104,7 +117,7 @@ These are defaults, not hard laws. Adapt by use case and skill guidance.
 
 ---
 
-## 7) SEO Baseline
+## 8) SEO Baseline
 
 Every production page should include:
 - Metadata title and description via Next.js Metadata API
@@ -116,7 +129,7 @@ Every production page should include:
 
 ---
 
-## 8) Sub-agents
+## 9) Sub-agents
 
 Use sub-agents when tasks are independent:
 - Separate page sections
@@ -130,7 +143,7 @@ Rules:
 
 ---
 
-## 9) Skills (Project-Local)
+## 10) Skills (Project-Local)
 
 All skills in this repo are project-local under `.claude/skills/`. The active inventory is intentionally limited to **26 skills**:
 
@@ -147,7 +160,7 @@ Structure rules:
 
 ---
 
-## 10) Content and Media Placement
+## 11) Content and Media Placement
 
 Use `public/content/` for final assets that must be publicly served.
 
@@ -166,7 +179,7 @@ Recommended structure:
 
 ---
 
-## 11) Code Rules
+## 12) Code Rules
 
 - Use `var(--token)` for component colors (avoid hardcoded hex in components)
 - Prefer semantic HTML (`section`, `article`, `nav`, `header`, `footer`)
@@ -177,7 +190,7 @@ Recommended structure:
 
 ---
 
-## 12) Context and Uncertainty Policy
+## 13) Context and Uncertainty Policy
 
 Keep this file and related context lean:
 - No conversation logs
@@ -192,7 +205,7 @@ Working style:
 
 ---
 
-## 13) Useful Commands
+## 14) Useful Commands
 
 ```bash
 npm run dev

@@ -1,30 +1,33 @@
 # Unslop
 
-> A boilerplate for AI-assisted website builds, with the instructions, tools, and design systems needed to ship cleaner, sharper website design with any AI coding tool.
+> A practical starter for building higher-quality websites and full-stack web apps with AI coding tools.
 
-Unslop is the template I use when starting a new website project.
+Unslop packages the project structure, AI instructions, local skills, MCP setup, and documentation patterns I want at the start of a serious AI-assisted build.
 
-The goal is simple: every new build should start from the same solid base, use the same good practices, and give the AI the same high-quality context from day one. Instead of reassembling that setup every time, I bundled it here, instructions, skills, MCPs, CLI tools, and a minimal project scaffold.
+The goal is simple: give the AI good context before it writes code, give humans clear places to put decisions and inspiration, and keep the project shippable instead of letting it drift into generic AI output.
 
 Current local skill inventory: **26 project-level skills** in `.claude/skills/`, with one folder per skill.
 
-This repo is opinionated, practical, and still evolving. I update it as I find better tools, better patterns, and better ways to make AI-assisted web builds more repeatable.
+This repo is opinionated, practical, and still evolving.
 
 If you have ideas, improvements, or tools that deserve a place in the stack, open an issue or submit a PR.
 
 ---
 
-## Works with any AI coding tool
+## Why This Exists
 
-I use Claude Code daily so that's what this is built around, but Unslop isn't locked to one AI. Cursor, GitHub Copilot, Codex, Windsurf — they all read instruction files. Rename `CLAUDE.md` to `AGENTS.md` or whatever your tool expects and you're good to go.
+Most AI-generated sites fail for boring reasons: missing context, weak taste, placeholder content, no visual references, no QA loop, and no clear source of truth. Unslop gives those pieces a home.
 
-The value here isn't the AI — it's the stack. The combination of:
-- **Instructions** that teach any AI to stop generating slop and start building with taste
-- **CLI tools** that give your AI real capabilities — deploy, scrape, test, screenshot, all from the terminal
-- **MCP resources** that give your AI access to quality components instead of hallucinating everything from scratch
-- **Skills** that enforce best practices — accessibility, production quality, design critique, polish, and the stuff AI skips by default
+It is built around Claude Code, but the structure is useful in Cursor, Codex, Windsurf, GitHub Copilot, and other agentic tools. Rename `CLAUDE.md` to the instruction filename your tool expects if needed.
 
-Swap the AI, keep the stack. The setup is the value.
+The stack combines:
+
+- **Project instructions** in `CLAUDE.md`
+- **Design decisions** in `docs/design/DESIGN.md`
+- **Human inspiration intake** in `docs/inspiration/`
+- **Content staging** in `docs/content/` and `public/content/`
+- **Local skills** for design critique, polishing, research, and UI/UX guidance
+- **MCPs** for component discovery and backend work
 
 ---
 
@@ -46,30 +49,40 @@ npm run dev
 
 ## What's Inside
 
-### The CLAUDE.md
+### Project instructions
 
-This is the core instruction file. It tells the AI how to work inside the project and what standards to follow.
+`CLAUDE.md` is the operating manual for the AI. It covers:
 
-It covers things like:
-
-- Fill project context first before implementation work starts
-- Build SEO-optimized pages (meta tags, Open Graph, JSON-LD, sitemap, robots.txt, llms.txt)
+- Fill project context before implementation
+- Use `docs/design/DESIGN.md` as the design source of truth
+- Check `docs/inspiration/` for relevant visual references before design work
+- Build SEO-ready pages with metadata, Open Graph, JSON-LD, sitemap, robots, and `llms.txt`
 - Use Framer Motion defaults with flexibility per use case (including reduced motion)
 - Run CLI-first workflows (Vercel, GitHub, Firecrawl, Playwright) for token efficiency
-- Use the configured Magic MCP from 21st.dev when selecting React components
+- Use Magic / 21st.dev when selecting React components
 - Use Supabase MCP for backend schema, SQL, migrations, auth, and project metadata
-- Use parallel sub-agents only when tasks are independent
-- Keep context lean and ask focused questions when requirements are unclear
 
-### The DESIGN.md
+### Design source of truth
 
-Design decisions live in a dedicated file at `docs/design/DESIGN.md`.
+Design decisions live in `docs/design/DESIGN.md`.
 
-This is the shared design spec for both the user and the AI:
 - Keep project-specific design direction there (not in CLAUDE.md)
 - Update it as visual decisions evolve
-- Keep it minimal and practical: core rules first, details only when needed
+- Distill inspiration into decisions before implementation
 
+### Inspiration library
+
+`docs/inspiration/` is where humans can collect references before the AI designs:
+
+- screenshots
+- example `DESIGN.md` files
+- Google Stitch outputs
+- Claude Design outputs
+- AI design drafts
+- competitor notes
+- moodboards and design research
+
+Keep it simple: drop references directly in the folder, add short notes when needed, and distill real decisions into `docs/design/DESIGN.md`.
 
 ### Framework & Core
 
@@ -112,16 +125,6 @@ This is the shared design spec for both the user and the AI:
 No skill in this template is assumed to be global-only.
 
 All skills are stored directly at `.claude/skills/<skill-name>/`.
----
-
-## Coming Soon
-
-Things I'm currently trying out and might add to the stack:
-
-- **Nano Banana MCP** — AI-powered design assistance, looks promising
-- **Chrome DevTools MCP** — browser debugging and performance profiling straight from Claude Code
-- **Pencil.dev MCP** — collaborative design tooling, same deal — trying it out
-- UI UX Pro CLI ?
 
 ---
 
@@ -136,7 +139,7 @@ unslop/
 ├── next.config.ts               # Next.js config
 ├── postcss.config.mjs           # PostCSS + Tailwind
 ├── .gitignore
-├── .mcp.json                    # MCP server config (Magic / 21st.dev; add your API key)
+├── .mcp.json                    # MCP server config (Magic / 21st.dev + Supabase)
 ├── skills-lock.json             # Locked GitHub-installed Impeccable skill versions
 ├── .claude/
 │   ├── settings.json            # Claude Code permissions
@@ -170,6 +173,8 @@ unslop/
 ├── docs/
 │   ├── design/
 │   │   └── DESIGN.md            # Shared design spec (user + AI)
+│   ├── inspiration/             # Human-curated visual and product references
+│   │   ├── README.md            # Inspiration workflow
 │   └── content/
 │       ├── README.md            # Raw -> production content flow
 │       └── inbox/               # Raw user files (non-public)
@@ -199,7 +204,7 @@ unslop/
 ### Prerequisites
 
 - Node.js 20+
-- [Claude Code](https://claude.ai/code) CLI installed
+- An AI coding tool that can read project instructions
 - [GitHub CLI](https://cli.github.com/) (`gh`)
 - [Vercel CLI](https://vercel.com/docs/cli) (`npm i -g vercel`)
 - [Playwright CLI](https://playwright.dev/) (`npx playwright install`)
@@ -209,10 +214,19 @@ unslop/
 ### Configure MCPs
 
 Edit `.mcp.json` and add your project credentials:
-- **Magic / 21st.dev**: replace `YOUR_API_KEY_HERE` with your 21st.dev API key.
-- **Supabase**: replace `YOUR_PROJECT_REF` with your Supabase project ref. The hosted MCP uses browser-based OAuth in clients that support it; keep it project-scoped.
+- **Magic / 21st.dev**: replace `YOUR_API_KEY_HERE` with your 21st.dev API key
+- **Supabase**: replace `YOUR_PROJECT_REF` with your Supabase project ref
 
 > **Warning**: Never commit real API keys. The `.mcp.json` ships with placeholders only.
+
+### Start a new project
+
+Before asking the AI to build:
+
+1. Fill `docs/project-context.md`.
+2. Add visual references to `docs/inspiration/`.
+3. Fill the first pass of `docs/design/DESIGN.md`.
+4. Then ask the AI to implement.
 
 ---
 
@@ -227,6 +241,14 @@ Tools, skills, and references that power this stack:
 - [UI/UX Pro Max Skill](https://ui-ux-pro-max-skill.nextlevelbuilder.io/) — advanced design system queries and generation (included locally in this template)
 - [Firecrawl](https://www.firecrawl.dev/) — web scraping and content extraction
 - [Playwright](https://playwright.dev/) — browser automation and visual testing
+- [MotionSites](https://motionsites.ai/) — hero section and animated landing-page prompt inspiration
+- [Designspiration](https://www.designspiration.com/) — broad visual moodboards, color, typography, photography, and layout ideas
+- [Dribbble](https://dribbble.com/) — UI shots, interaction ideas, visual style exploration, and component polish references
+- [Godly](https://godly.website/) — high-end website inspiration with polished visual direction
+- [Land-book](https://land-book.com/) — website and landing page inspiration across modern product, SaaS, portfolio, and ecommerce sites
+- [Unsplash](https://unsplash.com/) — free photography and image assets for drafts, hero images, moodboards, and content direction
+- [Higgsfield](https://higgsfield.ai/) — AI image and video generation, cinematic visuals, product imagery, and campaign-style assets
+- [Awesome DESIGN.md](https://github.com/VoltAgent/awesome-design-md) — example `DESIGN.md` files inspired by popular websites and brand design systems
 
 ---
 
