@@ -1,209 +1,206 @@
-# vibe-stack — CLAUDE.md
+# vibe-stack - CLAUDE.md
 
-> Read this before touching any file. This is the AI's operating manual for this project.
-
----
-
-## Identity
-
-- **What:** A vibe-coded website project bootstrapped from vibe-stack
-- **Goal:** Ship a professional, animated, SEO-optimized website — not AI slop
+> Template operating manual for projects bootstrapped from vibe-stack.
 
 ---
 
-## Stack
+## 0) First Step After Cloning
+
+Before building features, fill the Project Context section below.
+If context is missing or ambiguous, ask the user a focused question before implementation.
+
+---
+
+## 1) Project Context (Fill First)
+
+Copy this section into `docs/project-context.md` and fill it:
+
+- Project name:
+- Product type:
+- Target users:
+- Main user goal:
+- Primary pages/routes:
+- Brand voice and visual direction:
+- Required integrations:
+- SEO priorities:
+- Performance priorities:
+- Non-goals:
+- Launch constraints:
+
+This block is project-dependent and is required for reliable output.
+
+---
+
+## 2) Design Source Of Truth
+
+Keep website design decisions in `docs/design/DESIGN.md`.
+
+Rules:
+- User and AI both update that file as decisions evolve.
+- Keep `CLAUDE.md` for operating rules only (do not duplicate detailed design specs here).
+
+---
+
+## 3) Stack
 
 | Layer | Choice |
 |-------|--------|
 | Framework | Next.js (App Router) |
 | Language | TypeScript (strict) |
-| Styling | Tailwind CSS + CSS custom properties for design tokens |
-| Components | shadcn/ui — extend, don't override |
-| Animations | Framer Motion — `LazyMotion` + `domAnimation` only |
-| Backend | Supabase (via MCP) |
+| Styling | Tailwind CSS + CSS custom properties for tokens |
+| Components | shadcn/ui (extend, do not fight base patterns) |
+| Motion | Framer Motion (prefer LazyMotion + domAnimation) |
+| Backend | Supabase via MCP when available |
 | Deployment | Vercel |
 | Source control | GitHub |
 
-### Key packages to know
-- `framer-motion` — all animation (never raw CSS animation for complex motion)
-- `shadcn/ui` — base components
-- `next/font` — font loading (no external font CDNs)
-- Check **21st.dev MCP** before building complex animated components from scratch
+Key packages:
+- `framer-motion`
+- `shadcn/ui`
+- `next/font`
 
 ---
 
-## SEO & Discoverability
+## 4) MCPs
 
-Every page must have:
-- `<title>` and `<meta name="description">` via Next.js Metadata API
+Use the configured MCP servers in `.mcp.json` when they fit the task:
+
+| MCP | Use For |
+|-----|---------|
+| Magic / 21st.dev | Search and select high-quality React components before building from scratch |
+| Supabase | Backend work: schema inspection, migrations, SQL, auth, generated types, and project metadata |
+
+Component rule: check **Magic / 21st.dev** before building complex React UI from scratch, then adapt results to `docs/design/DESIGN.md`.
+
+Backend rule: use **Supabase MCP** for database and backend operations when a Supabase project is configured. Prefer project-scoped access with `project_ref`.
+
+---
+
+## 5) CLI-First and Token-Efficient Workflow
+
+Use CLI tools by default to reduce context and token usage.
+
+| Tool | Preferred usage |
+|------|------------------|
+| Vercel CLI | `vercel deploy --prod`, `vercel env pull`, `vercel logs` |
+| GitHub CLI | `gh pr create`, `gh pr view`, `gh issue create` |
+| Firecrawl CLI | `npx firecrawl scrape`, `npx firecrawl search`, `npx firecrawl crawl` |
+| Playwright CLI | `npx playwright test` |
+| Magic MCP | 21st.dev component search and selection |
+| Supabase MCP | Backend schema, SQL, migrations, auth, and project metadata |
+
+Rules:
+- Prefer direct CLI runs over long explanatory back-and-forth.
+- Keep command output summaries short and relevant.
+- Avoid loading large files unless required for the task.
+
+---
+
+## 6) Motion Guidance (Flexible Defaults)
+
+These are defaults, not hard laws. Adapt by use case and skill guidance.
+
+- Prefer `LazyMotion` + `domAnimation` for most pages.
+- Prefer transform and opacity animations for performance.
+- Respect reduced motion (`useReducedMotion()`).
+- Use subtle entry and hover motion when it improves clarity.
+- If a selected skill recommends a different motion pattern, follow the skill.
+
+---
+
+## 7) SEO Baseline
+
+Every production page should include:
+- Metadata title and description via Next.js Metadata API
 - Open Graph tags (`og:title`, `og:description`, `og:image`)
-- Structured data (JSON-LD) where appropriate
-- Generate `sitemap.xml` at build time (use `next-sitemap` or App Router sitemap)
-- `robots.txt` — allow all, point to sitemap
-- `llms.txt` — describe the site for AI crawlers (template in `/public/llms.txt`)
+- Structured data (JSON-LD) where relevant
+- `sitemap.xml`
+- `robots.txt` that references sitemap
+- `llms.txt` in public
 
 ---
 
-## Animation Rules
+## 8) Sub-agents
 
-- Always use `LazyMotion` + `domAnimation` feature bundle (never the full Framer Motion bundle)
-- Entry: `opacity: 0 → 1`, `y: 24 → 0`, spring or ease-out, 0.5–0.8s
-- Stagger: `0.08s` between children via `staggerChildren` in variants
-- Hover: `scale: 1.02` on cards (spring), never scale text
-- Always respect `useReducedMotion()` — wrap all motion
-- No layout animations on landing pages (performance)
-- Animate only `transform` and `opacity` (GPU-accelerated properties)
+Use sub-agents when tasks are independent:
+- Separate page sections
+- SEO/setup vs UI implementation
+- Research vs coding
 
----
-
-## Anti-AI-Slop Rules
-
-These rules exist because AI-generated websites all look the same. Break the pattern.
-
-### NEVER
-- Gradient text
-- Purple/blue neon glows
-- Floating blob decorations
-- Emoji in UI copy or code
-- Generic "AI grid" background patterns
-- `border-radius` > 8px on buttons
-- Dark mode purple soup
-- Placeholder text in production ("Lorem ipsum", "[Your title here]")
-
-### ALWAYS
-- Strong typographic hierarchy (size contrast between heading levels)
-- Structured whitespace — let the layout breathe
-- Semantic HTML (`section`, `article`, `nav`, `header`, `footer` — not `div` soup)
-- CSS custom properties for ALL colors (`var(--token)`, never hardcoded hex in components)
-- One accent color max — restraint is taste
-- Real content, real copy, real data
+Rules:
+- Keep each sub-agent scope narrow.
+- Run in parallel only when tasks do not depend on each other.
+- Summarize outcomes briefly before continuing.
 
 ---
 
-## CLI-First Workflow
+## 9) Skills (Project-Local)
 
-Use these CLIs directly — don't use the web UI when the CLI works:
+All skills in this repo are project-local under `.claude/skills/`. The active inventory is intentionally limited to **26 skills**:
 
-| Tool | Usage |
-|------|-------|
-| **Vercel CLI** | `vercel deploy --prod`, `vercel env pull`, `vercel logs` |
-| **GitHub CLI** | `gh pr create`, `gh issue create`, `gh repo` |
-| **Firecrawl CLI** | `npx firecrawl scrape <url>`, `npx firecrawl search <query>`, `npx firecrawl crawl <url>` — web scraping, research, competitive analysis |
-| **Playwright CLI** | `npx playwright test` — E2E tests, visual regression, screenshots |
-| **Impeccable** | `/impeccable audit`, `/impeccable polish` — design quality enforcement |
+| Slice | Count | Purpose |
+|-------|-------|---------|
+| Impeccable | 17 | Design quality workflow: shape, audit, critique, layout, polish, motion, clarity, responsiveness, optimization |
+| Firecrawl | 8 | Web search, scraping, crawling, mapping, interaction, download, and structured extraction |
+| UI/UX Pro Max | 1 | Design intelligence search and generation workflows |
 
-#### Firecrawl: Website Scraping & Research
-
-Firecrawl is a CLI-first tool for extracting content from websites. Use it for:
-- **Scraping**: Extract markdown from any URL (`firecrawl scrape <url>`)
-- **Search**: Web search with full-page content extraction (`firecrawl search <query>`)
-- **Crawl**: Bulk extract entire site sections (`firecrawl crawl <url>`)
-- **Interact**: Navigate and click through JavaScript-driven pages
-- **Map**: Discover all URLs on a site
-
-
-### Deploy flow
-```bash
-npm run build          # verify build passes
-vercel deploy --prod   # deploy to production
-```
-
-### Git flow
-```bash
-gh pr create           # create PR from current branch
-gh pr merge            # merge after review
-```
+Structure rules:
+- One folder per skill: `.claude/skills/<skill-name>/`
+- Do not use family wrapper folders
+- If a new skill is added, document it in `README.md`
 
 ---
 
-## Sub-agents
+## 10) Content and Media Placement
 
-Use parallel sub-agents (via Superpowers plugin) whenever tasks are independent:
-- Separate agents for different page sections
-- Separate agents for SEO setup vs component building
-- Separate agents for test writing vs implementation
-- Separate agents for research vs coding
+Use `public/content/` for final assets that must be publicly served.
 
-This is faster and keeps context windows clean.
+Use `docs/content/inbox/` for raw user-provided source files you want to keep in the project but not serve publicly.
 
----
+Workflow:
+- Raw/source assets in `docs/content/inbox/`
+- Optimized production assets in `public/content/`
+- Keep project notes and rationale in `docs/`
 
-## Supabase Backend
-
-All backend work goes through the Supabase MCP:
-- Schema changes via `apply_migration` (never raw SQL in app code)
-- Use `execute_sql` for queries during development
-- Auth via Supabase Auth — don't roll your own
-- Edge Functions for server-side logic that doesn't fit in Next.js API routes
-- Never hardcode connection strings — use environment variables via `vercel env pull`
+Recommended structure:
+- `public/content/images/`
+- `public/content/videos/`
+- `public/content/icons/`
+- `public/content/downloads/`
 
 ---
 
-## Design Quality
+## 11) Code Rules
 
-Before calling a page "done":
-1. Run `/impeccable audit` to check for design issues
-2. Run `/impeccable polish` to refine details
-3. Use Playwright to screenshot at 375px, 768px, and 1440px
-4. Check color contrast meets WCAG AA minimum
-5. Verify animations respect `prefers-reduced-motion`
-
-### Skills available
-- `/impeccable` — full design audit suite (audit, polish, animate, bolder, clarify, colorize, critique, delight, distill, layout, optimize, overdrive, quieter, shape, typeset)
-- `/design-taste-frontend` — anti-AI-slop design enforcement
-- `/high-end-visual-design` — premium agency-level design standards
-- `/stitch-design-taste` — semantic design system generation
-- `/firecrawl-scrape`, `/firecrawl-search`, `/firecrawl-crawl`, `/firecrawl-interact`, `/firecrawl-map`, `/firecrawl-download`, `/firecrawl-agent` — website scraping and content extraction
-
----
-
-## Code Rules
-
-- `var(--token)` for all colors — zero hardcoded hex in components
+- Use `var(--token)` for component colors (avoid hardcoded hex in components)
+- Prefer semantic HTML (`section`, `article`, `nav`, `header`, `footer`)
 - One component per file, PascalCase naming
-- Server actions: camelCase verbs (`joinWaitlist`, `submitFeedback`)
-- CSS tokens: `--category-variant` pattern
-- No `@apply` — inline Tailwind utility classes only
-- Semantic HTML over `div`
-- `noEmit` type check before every commit: `npx tsc --noEmit`
-- Prefer `next/font` for all font loading
+- No Tailwind `@apply`
+- Typecheck before commit: `npx tsc --noEmit`
+- Prefer `next/font` for font loading
 
 ---
 
-## Context Optimization
+## 12) Context and Uncertainty Policy
 
-Keep this CLAUDE.md lean. Don't add:
-- Conversation logs or session notes
-- Debugging history
-- Copy-pasted documentation
-- Redundant explanations
+Keep this file and related context lean:
+- No conversation logs
+- No long debug transcripts
+- No copy-pasted external docs
 
-If you need project-specific context (design tokens, component inventory, API schemas), create separate files in a `docs/` folder and reference them here.
-
----
-
-## Removed: Gemini Design MCP
-
-The Gemini Design MCP was removed from this stack because it consumed too many tokens for marginal benefit. Instead, use:
-- **21st.dev MCP** for searching and installing pre-built animated components
-- **Design skills** (`/impeccable`, `/design-taste-frontend`, `/high-end-visual-design`, etc.) for design intelligence and audits
-- **Firecrawl skills** for researching competitor design and extracting design inspiration from the web
-
-This approach is more token-efficient and gives you real, reusable components instead of AI-generated code.
+Working style:
+- Read only what is needed.
+- Summarize findings briefly.
+- Ask a question when unsure instead of guessing.
+- Prefer one clear question over multiple speculative assumptions.
 
 ---
 
-## Screenshots
-
-Save all Playwright screenshots to `screenshots/` at project root. Never save to project root or `.playwright-mcp/`.
-
----
-
-## Commands
+## 13) Useful Commands
 
 ```bash
-npm run dev        # dev server
-npm run build      # production build
-npm run lint       # linting
-npm run typecheck  # strict TypeScript check
+npm run dev
+npm run build
+npm run lint
+npm run typecheck
 ```

@@ -6,6 +6,8 @@ Unslop is the template I use when starting a new website project.
 
 The goal is simple: every new build should start from the same solid base, use the same good practices, and give the AI the same high-quality context from day one. Instead of reassembling that setup every time, I bundled it here, instructions, skills, MCPs, CLI tools, and a minimal project scaffold.
 
+Current local skill inventory: **26 project-level skills** in `.claude/skills/`, with one folder per skill.
+
 This repo is opinionated, practical, and still evolving. I update it as I find better tools, better patterns, and better ways to make AI-assisted web builds more repeatable.
 
 If you have ideas, improvements, or tools that deserve a place in the stack, open an issue or submit a PR.
@@ -19,8 +21,8 @@ I use Claude Code daily so that's what this is built around, but Unslop isn't lo
 The value here isn't the AI — it's the stack. The combination of:
 - **Instructions** that teach any AI to stop generating slop and start building with taste
 - **CLI tools** that give your AI real capabilities — deploy, scrape, test, screenshot, all from the terminal
-- **MCP resources** that give your AI access to quality components and design systems instead of hallucinating everything from scratch
-- **Skills** that enforce best practices — design taste, accessibility, production quality, the stuff AI skips by default
+- **MCP resources** that give your AI access to quality components instead of hallucinating everything from scratch
+- **Skills** that enforce best practices — accessibility, production quality, design critique, polish, and the stuff AI skips by default
 
 Swap the AI, keep the stack. The setup is the value.
 
@@ -50,12 +52,24 @@ This is the core instruction file. It tells the AI how to work inside the projec
 
 It covers things like:
 
+- Fill project context first before implementation work starts
 - Build SEO-optimized pages (meta tags, Open Graph, JSON-LD, sitemap, robots.txt, llms.txt)
-- Animate with Framer Motion properly (LazyMotion, spring physics, reduced motion support) — not random CSS animations
-- What to never do — no gradient text, no purple neon, no floating blobs, no emoji in UI, no placeholder text
-- Deploy everything from the terminal via Vercel, GitHub, Firecrawl, Playwright CLIs
-- Use parallel sub-agents for independent tasks, Supabase backend via MCP
-- Stay efficient with context window — don't waste tokens on stuff that doesn't matter
+- Use Framer Motion defaults with flexibility per use case (including reduced motion)
+- Run CLI-first workflows (Vercel, GitHub, Firecrawl, Playwright) for token efficiency
+- Use the configured Magic MCP from 21st.dev when selecting React components
+- Use Supabase MCP for backend schema, SQL, migrations, auth, and project metadata
+- Use parallel sub-agents only when tasks are independent
+- Keep context lean and ask focused questions when requirements are unclear
+
+### The DESIGN.md
+
+Design decisions live in a dedicated file at `docs/design/DESIGN.md`.
+
+This is the shared design spec for both the user and the AI:
+- Keep project-specific design direction there (not in CLAUDE.md)
+- Update it as visual decisions evolve
+- Keep it minimal and practical: core rules first, details only when needed
+
 
 ### Framework & Core
 
@@ -69,19 +83,12 @@ It covers things like:
 
 ## The Stack
 
-### Plugins (Claude Code)
-
-| Plugin | What it does |
-|--------|-------------|
-| **Superpowers** | Parallel sub-agents, code review, git workflows, plan-then-execute |
-| **Supabase** | Database, auth, edge functions — all via MCP |
-| **Vercel** | Deployment, env vars, domain management, framework intelligence |
-
 ### MCPs
 
 | MCP | What it does |
 |-----|-------------|
-| **21st.dev** | Search and install animated React components (configured in `.claude/.mcp.json`) |
+| **Magic / 21st.dev** | Search and select high-quality React components before building from scratch (configured in `.mcp.json`) |
+| **Supabase** | Backend access for schema inspection, SQL, migrations, auth, generated types, and project metadata (configured in `.mcp.json`) |
 
 ### CLIs
 
@@ -90,24 +97,21 @@ It covers things like:
 | **Playwright** | E2E testing, visual regression, screenshots |
 | **Impeccable** | Design quality audits (audit, polish, animate, critique...) |
 | **Firecrawl** | Web scraping, search, content extraction |
-| **GitHub ** | PRs, issues, releases from terminal |
-| **Vercel ** | Deploy, env vars, domains, logs |
+| **GitHub** | PRs, issues, releases from terminal |
+| **Vercel** | Deploy, env vars, domains, logs |
 
-### Skills (bundled in `.claude/skills/`)
+### Skills (project-local in `.claude/skills/`)
 
-| Skill | What it does |
-|-------|-------------|
-| **Impeccable** (18 skills) | Full design audit suite — audit, polish, animate, bolder, clarify, colorize, critique, delight, distill, layout, optimize, overdrive, quieter, shape, typeset, adapt, impeccable |
-| **UI UX Pro Max** (7 skills) | "AI skill that provides design intelligence for building professional UI/UX"|
-| **design-taste-frontend** | Anti-AI-slop design enforcement with metric-based rules |
-| **high-end-visual-design** | Premium agency-level design standards |
-| **minimalist-ui** | Editorial-style, warm monochrome, ultra-flat components |
-| **industrial-brutalist-ui** | Raw Swiss typography meets terminal aesthetics |
-| **redesign-existing-projects** | Audit and upgrade existing websites |
-| **stitch-design-taste** | Semantic design system generation (DESIGN.md files) |
-| **Firecrawl Skills** (7 skills) | Web content extraction and research — scrape, search, crawl, interact, map, download, agent (structured data) |
+| Skill Slice | What it does | Count |
+|-------|-------------|-------|
+| **Impeccable skills** | Design quality workflow and focused modules (audit, critique, polish, motion, layout, clarity, responsiveness, optimization) | **17** |
+| **Firecrawl skills** | Web research and extraction (search, scrape, crawl, interact, map, download, structured agent) | **8** |
+| **UI/UX Pro Max** | Design intelligence search and generation workflows | **1** |
+| **Total (project-local)** | All skills loaded from this repo | **26** |
 
-...
+No skill in this template is assumed to be global-only.
+
+All skills are stored directly at `.claude/skills/<skill-name>/`.
 ---
 
 ## Coming Soon
@@ -116,7 +120,6 @@ Things I'm currently trying out and might add to the stack:
 
 - **Nano Banana MCP** — AI-powered design assistance, looks promising
 - **Chrome DevTools MCP** — browser debugging and performance profiling straight from Claude Code
-- **Google Stitch MCP** — semantic design system generation, haven't fully tested yet
 - **Pencil.dev MCP** — collaborative design tooling, same deal — trying it out
 - UI UX Pro CLI ?
 
@@ -133,18 +136,43 @@ unslop/
 ├── next.config.ts               # Next.js config
 ├── postcss.config.mjs           # PostCSS + Tailwind
 ├── .gitignore
-├── skills-lock.json             # Locked skill versions
+├── .mcp.json                    # MCP server config (Magic / 21st.dev; add your API key)
+├── skills-lock.json             # Locked GitHub-installed Impeccable skill versions
 ├── .claude/
 │   ├── settings.json            # Claude Code permissions
-│   ├── .mcp.json                # MCP server config (add your API keys)
-│   └── skills/                  # 23 bundled design skills
-│       ├── impeccable/          # Core design intelligence
-│       ├── audit/               # Design audit
-│       ├── polish/              # Design polish
-│       ├── animate/             # Animation guidance
-│       ├── design-taste-frontend/  # Anti-AI-slop enforcement
-│       ├── high-end-visual-design/ # Premium design standards
-│       └── ... (18 more)
+│   └── skills/                  # 26 project-local skills (one folder per skill)
+│       ├── adapt/
+│       ├── animate/
+│       ├── audit/
+│       ├── bolder/
+│       ├── clarify/
+│       ├── colorize/
+│       ├── critique/
+│       ├── delight/
+│       ├── distill/
+│       ├── firecrawl/
+│       ├── firecrawl-agent/
+│       ├── firecrawl-crawl/
+│       ├── firecrawl-download/
+│       ├── firecrawl-interact/
+│       ├── firecrawl-map/
+│       ├── firecrawl-scrape/
+│       ├── firecrawl-search/
+│       ├── impeccable/
+│       ├── layout/
+│       ├── optimize/
+│       ├── overdrive/
+│       ├── polish/
+│       ├── quieter/
+│       ├── shape/
+│       ├── typeset/
+│       └── ui-ux-pro-max/
+├── docs/
+│   ├── design/
+│   │   └── DESIGN.md            # Shared design spec (user + AI)
+│   └── content/
+│       ├── README.md            # Raw -> production content flow
+│       └── inbox/               # Raw user files (non-public)
 ├── app/
 │   ├── layout.tsx               # Root layout
 │   ├── page.tsx                 # Start here
@@ -153,6 +181,11 @@ unslop/
 │   └── motion/                  # Animation wrappers
 ├── lib/                         # Utilities
 ├── public/
+│   ├── content/
+│   │   ├── images/             # Final images served by the website
+│   │   ├── videos/             # Final videos served by the website
+│   │   ├── icons/              # Final icons/SVGs served by the website
+│   │   └── downloads/          # Final downloadable files
 │   ├── robots.txt               # SEO
 │   ├── sitemap.xml              # SEO (generate at build)
 │   └── llms.txt                 # AI discoverability
@@ -171,20 +204,13 @@ unslop/
 - [Vercel CLI](https://vercel.com/docs/cli) (`npm i -g vercel`)
 - [Playwright CLI](https://playwright.dev/) (`npx playwright install`)
 - [Firecrawl CLI](https://www.firecrawl.dev/) (`npm i -g firecrawl`)
-- [UI/UX Pro Max Skill](https://ui-ux-pro-max-skill.nextlevelbuilder.io/) — installed globally in your Claude Code config (`claude skill add`)
-
-### Install Claude Code plugins
-
-```bash
-claude plugin add superpowers
-claude plugin add supabase
-claude plugin add vercel
-```
+- UI/UX Pro Max is included in `.claude/skills/ui-ux-pro-max/` (project-local)
 
 ### Configure MCPs
 
-Edit `.claude/.mcp.json` and add your API keys:
-- **21st.dev**: Get a key at [21st.dev](https://21st.dev)
+Edit `.mcp.json` and add your project credentials:
+- **Magic / 21st.dev**: replace `YOUR_API_KEY_HERE` with your 21st.dev API key.
+- **Supabase**: replace `YOUR_PROJECT_REF` with your Supabase project ref. The hosted MCP uses browser-based OAuth in clients that support it; keep it project-scoped.
 
 > **Warning**: Never commit real API keys. The `.mcp.json` ships with placeholders only.
 
@@ -196,10 +222,9 @@ Tools, skills, and references that power this stack:
 
 - [Impeccable](https://impeccable.style/) — design quality CLI for auditing and polishing UI
 - [21st.dev](https://21st.dev/home) — animated React component library via MCP
+- [Supabase MCP](https://supabase.com/mcp) — backend, database, and project access through MCP
 - [Pencil.dev](https://www.pencil.dev/) — collaborative design tooling
-- [Google Stitch](https://stitch.withgoogle.com/) — semantic design system generation
-- [Taste Skill](https://github.com/Leonxlnx/taste-skill) — design taste enforcement skills for Claude Code
-- [UI/UX Pro Max Skill](https://ui-ux-pro-max-skill.nextlevelbuilder.io/) — advanced design system queries and generation (global prerequisite)
+- [UI/UX Pro Max Skill](https://ui-ux-pro-max-skill.nextlevelbuilder.io/) — advanced design system queries and generation (included locally in this template)
 - [Firecrawl](https://www.firecrawl.dev/) — web scraping and content extraction
 - [Playwright](https://playwright.dev/) — browser automation and visual testing
 
