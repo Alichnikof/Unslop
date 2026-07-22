@@ -9,6 +9,6 @@ Drop in screenshots, links, exported designs, `DESIGN.md` examples, Claude Desig
 - Add files directly in this folder.
 - Add a short note beside each reference when the lesson is not obvious.
 - Before visual design work, the AI may scan this folder for relevant references.
-- Decisions that should guide the actual build belong in `docs/design/DESIGN.md`.
+- Decisions that should guide the actual build belong in root `DESIGN.md`.
 
 Keep this folder useful, not perfect. It is allowed to be messy.
