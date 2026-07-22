@@ -9,10 +9,13 @@
       "Bash(npm test*)",
       "Bash(npm install*)",
       "Bash(npm run *)",
-      "Bash(vercel *)",
+      "Bash(npx wrangler *)",
       "Bash(gh *)",
       "Bash(npx playwright *)",
       "Bash(npx firecrawl *)",
+      "Bash(npx shadcn@latest *)",
+      "Bash(npx impeccable *)",
+      "Bash(higgsfield *)",
       "mcp__plugin_playwright_playwright__browser_navigate",
       "mcp__plugin_playwright_playwright__browser_take_screenshot",
       "mcp__plugin_playwright_playwright__browser_evaluate",
@@ -23,6 +26,21 @@
       "mcp__plugin_supabase_supabase__apply_migration",
       "mcp__plugin_supabase_supabase__list_migrations",
       "mcp__plugin_supabase_supabase__get_project"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"${CLAUDE_PROJECT_DIR}/.claude/skills/impeccable/scripts/hook.mjs\"",
+            "timeout": 5,
+            "statusMessage": "Checking UI changes"
+          }
+        ]
+      }
     ]
   }
 }
