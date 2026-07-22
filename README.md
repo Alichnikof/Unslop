@@ -35,7 +35,7 @@ The stack combines:
 
 ```bash
 # Clone and install
-git clone https://github.com/Alichnikof/unslop.git my-project
+git clone https://github.com/Alichnikof/Unslop.git my-project
 cd my-project
 npm install
 
