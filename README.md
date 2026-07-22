@@ -134,7 +134,7 @@ Not installed by default — pull these in when a specific project needs them:
 | **Conversion** | `page-cro` | **1** |
 | **Web research** | `firecrawl`, `firecrawl-search`, `firecrawl-scrape`, `firecrawl-crawl`, `firecrawl-map`, `firecrawl-download`, `firecrawl-interact`, `firecrawl-agent` | **8** |
 | **Creative generation** | `higgsfield-generate`, `higgsfield-product-photoshoot`, `higgsfield-marketplace-cards`, `higgsfield-soul-id`, `image` | **5** |
-| **Misc** | `playwright` | **1** |
+| **Testing & QA** | `playwright` | **1** |
 | **Total (project-local)** | All skills loaded from this repo | **40** |
 
 No skill in this template is assumed to be global-only. All skills are stored directly at `.claude/skills/<skill-name>/`.
