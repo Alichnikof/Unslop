@@ -3,7 +3,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Your Project",
-  description: "Built with vibe-stack",
+  description: "Built with Unslop",
 };
 
 export default function RootLayout({
